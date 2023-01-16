@@ -25,8 +25,7 @@ export class App extends Component{
   }
  
   render() {
-    console.log(this.state)
-    
+      
     const { searchQuery, page,} = this.state
         return (
     <Wrapper>

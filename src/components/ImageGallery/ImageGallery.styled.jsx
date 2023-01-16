@@ -1,5 +1,9 @@
 import styled from '@emotion/styled'
 
+export const Wrapper = styled.div`
+  align-items: center;
+`
+
 export const ImageGalleryList = styled.ul`
 display: grid;
   max-width: calc(100vw - 48px);
@@ -11,3 +15,4 @@ display: grid;
   list-style: none;
   margin-left: auto;
   margin-right: auto;`
+

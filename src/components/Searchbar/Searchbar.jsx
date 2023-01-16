@@ -20,9 +20,11 @@ export class Searchbar extends Component {
     this.setState({searchQuery: ''})
   }
 
-    render() {return(
-    <Header className="searchbar">
-      <SearchForm className="form" onSubmit={this.handelFormSbmit} >
+  render() {
+    console.log(this.state)
+    return (
+    <Header >
+      <SearchForm onSubmit={this.handelFormSbmit} >
           
           <SearchFormButton type="submit" className="button">
           <SearchFormLabel htmlFor="">ПЕРЕДЕЛАТЬ</SearchFormLabel>
@@ -36,7 +38,7 @@ export class Searchbar extends Component {
              name="searchQuery"
              autoFocus
              placeholder="Search images and photos"
-            value={this.searchQuery}
+            value={this.state.searchQuery}
             onChange={this.handelInputChange}
     />
     </SearchForm>
