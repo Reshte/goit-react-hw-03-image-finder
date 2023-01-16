@@ -12,16 +12,13 @@ export class ImageGallery extends Component {
     }
 
     async componentDidUpdate(prevProps, prevState) {
-        console.log(prevProps.searchQuery)
-      
+              
         if (prevProps.searchQuery !== this.props.searchQuery || prevProps.page !== this.props.page) {
             this.setState({loading:true})
             const response = await requestApi(this.props.page, this.props.searchQuery)
-            this.setState(prevState => ({ gallery: [...prevState.gallery, ...response.hits] }))
-            this.setState({loading: false})
-            } 
-        
-    }
+            this.setState(prevState => ({ gallery: [...prevState.gallery, ...response.hits], loading: false }))
+               }
+      }
 
     render() {
         const { gallery, loading } = this.state;

@@ -21,7 +21,7 @@ export class App extends Component{
 
   LoadMore = () => {
       this.setState(prevState => { return { page: prevState.page + 1 } 
-              })
+     })
   }
  
   render() {

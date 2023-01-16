@@ -3,7 +3,7 @@ import {Header, SearchForm, SearchFormButton, SearchFormLabel, SearchFormInput} 
 
 export class Searchbar extends Component {
     state = {
-        searchQuery: null,
+        searchQuery: '',
   }
   
   handelInputChange = (e) => {
@@ -17,32 +17,30 @@ export class Searchbar extends Component {
   }
   
   reset = () => {
-    this.setState({searchQuery: null})
+    this.setState({searchQuery: ''})
   }
 
     render() {return(
     <Header className="searchbar">
       <SearchForm className="form" onSubmit={this.handelFormSbmit} >
           
-            <SearchFormButton type="submit" className="button">
-          <SearchFormLabel htmlFor="">	
-&#128269;</SearchFormLabel>
-            </SearchFormButton>
+          <SearchFormButton type="submit" className="button">
+          <SearchFormLabel htmlFor="">ПЕРЕДЕЛАТЬ</SearchFormLabel>
+          </SearchFormButton>
              
 
     <SearchFormInput
-      className="input"
-      type="text"
-            autoComplete="off"
-            name=""
-      autoFocus
-            placeholder="Search images and photos"
-            // value={searchQuery}
-              onChange={this.handelInputChange}
+            className="input"
+            type="text"
+             autoComplete="off"
+             name="searchQuery"
+             autoFocus
+             placeholder="Search images and photos"
+            value={this.searchQuery}
+            onChange={this.handelInputChange}
     />
-      
-  </SearchForm>
-</Header>)
+    </SearchForm>
+  </Header>)
         
     }
 }
