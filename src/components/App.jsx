@@ -6,11 +6,13 @@ import { ImageGallery } from './ImageGallery/ImageGallery'
 import { Button } from './Button/Button'
 
 
+
 export class App extends Component{
 
   state = {
-    searchQuery: null,
+    searchQuery: '',
     page: 1,
+  
   }
   
   handelFormSbmit = (searchQuery) => {
@@ -18,24 +20,19 @@ export class App extends Component{
   }
 
   LoadMore = () => {
-    this.setState(prevState => { return {page: prevState.page + 1} })
+      this.setState(prevState => { return { page: prevState.page + 1 } 
+              })
   }
  
   render() {
     console.log(this.state)
     
-    const { searchQuery, page } = this.state
+    const { searchQuery, page,} = this.state
         return (
     <Wrapper>
-        <Searchbar onSubmit={this.handelFormSbmit} />
+            <Searchbar onSubmit={this.handelFormSbmit} />
             <ImageGallery searchQuery={searchQuery} page={page} />
-            <Button onClick={this.LoadMore} /> 
-            {/* <Searchbar />
-      
-      <ImageGalleryItem />
-      <Loader />
-      <Button /> 
-      <Modal />*/}
+            {searchQuery && (<Button onClick={this.LoadMore}/>)} 
     </Wrapper>)
   }
 
