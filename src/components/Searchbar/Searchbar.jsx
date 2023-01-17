@@ -1,5 +1,6 @@
 import { Component } from "react";
-import {Header, SearchForm, SearchFormButton, SearchFormLabel, SearchFormInput} from './Searchbar.styled'
+import { Header, SearchForm, SearchFormButton, SearchFormInput } from './Searchbar.styled'
+import { AiOutlineSearch } from "react-icons/ai";
 
 export class Searchbar extends Component {
     state = {
@@ -7,13 +8,13 @@ export class Searchbar extends Component {
   }
   
   handelInputChange = (e) => {
-       this.setState({searchQuery: e.currentTarget.value})  
+    this.setState({searchQuery: e.currentTarget.value.trim()})  
   }
 
   handelFormSbmit = (e) => {
-      e.preventDefault()
-         this.props.onSubmit(this.state);
-         this.reset()
+    e.preventDefault()
+    this.props.onSubmit(this.state);
+    this.reset()
   }
   
   reset = () => {
@@ -21,13 +22,12 @@ export class Searchbar extends Component {
   }
 
   render() {
-    console.log(this.state)
-    return (
+      return (
     <Header >
       <SearchForm onSubmit={this.handelFormSbmit} >
           
           <SearchFormButton type="submit" className="button">
-          <SearchFormLabel htmlFor="">ПЕРЕДЕЛАТЬ</SearchFormLabel>
+            <AiOutlineSearch size={20} />
           </SearchFormButton>
              
 

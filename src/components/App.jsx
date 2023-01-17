@@ -16,8 +16,8 @@ export class App extends Component{
   }
   
   handelFormSbmit = (searchQuery) => {
-   this.setState({ searchQuery })
-  }
+    if(searchQuery.searchQuery.length>0){this.setState({ searchQuery })}else{ alert('Enter something')}
+    }
 
   LoadMore = () => {
       this.setState(prevState => { return { page: prevState.page + 1 } 
