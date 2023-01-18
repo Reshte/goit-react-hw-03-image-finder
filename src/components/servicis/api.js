@@ -10,6 +10,6 @@ export const requestApi = async (page = 1, Query) => {
     );
     return response.data;
   } catch (error) {
-    console.log(error.toJSON());
+    console.log(error);
   }
 };
