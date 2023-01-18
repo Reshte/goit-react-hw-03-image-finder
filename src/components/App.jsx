@@ -17,7 +17,7 @@ export class App extends Component{
     page: 1,
     gallery: [],
     loading: false,
-    isLoadmore:false,
+    isLoadmore: false,
     }
   
   handelFormSbmit = (searchQuery) => {
@@ -27,7 +27,7 @@ export class App extends Component{
   async componentDidUpdate(prevProps, prevState) {
      
         if (prevState.searchQuery !== this.state.searchQuery) {
-            this.setState({ loading: true, isLoadmore:false })
+          this.setState({ loading: true})
           const response = await requestApi(this.state.page, this.state.searchQuery)
           
               if(response.hits.length >0){this.setState(prevState => { return { gallery: [...response.hits], loading: false, isLoadmore: true } })} 
@@ -51,7 +51,7 @@ export class App extends Component{
   }
  
   render() {
-      console.log(this.state)
+      
     const {isLoadmore, gallery, loading} = this.state
         return (
     <Wrapper>
@@ -65,6 +65,6 @@ export class App extends Component{
 }
 
 
-// searchQuery={searchQuery} page={page}
+
 
 
