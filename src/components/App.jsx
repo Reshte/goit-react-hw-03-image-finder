@@ -15,49 +15,51 @@ export class App extends Component{
   state = {
     searchQuery: '',
     page: 1,
+    totalPages:0,
     gallery: [],
     loading: false,
     isLoadmore: false,
-    }
+     }
   
   handelFormSbmit = (searchQuery) => {
     if(searchQuery.searchQuery.length>0){this.setState({ searchQuery })}else{toast("Enter something")}
   }
   
   async componentDidUpdate(prevProps, prevState) {
+    const {page,searchQuery} =this.state
      
-        if (prevState.searchQuery !== this.state.searchQuery) {
+        if (prevState.searchQuery !== searchQuery & searchQuery !== '') {
           this.setState({ loading: true})
-          const response = await requestApi(this.state.page, this.state.searchQuery)
-          
-              if(response.hits.length >0){this.setState(prevState => { return { gallery: [...response.hits], loading: false, isLoadmore: true } })} 
-              else {this.setState(prevState => { return { gallery: [], loading: false, searchQuery: '' } })
-                toast('Sorry, there are no images matching your search query. Please try again.')
-                return
+          const response = await requestApi(page, searchQuery)
+                   
+          if (response.hits.length > 0)
+             {this.setState(prevState => { return { gallery: [...response.hits], loading: false, isLoadmore: true, totalPages: response.totalHits } }) } 
+          else {this.setState(prevState => { return { gallery: [], loading: false, searchQuery: '', isLoadmore: false  } })
+              toast('Sorry, there are no images matching your search query. Please try again.')
+              return
             }
         }
 
-        if (prevState.page !== this.state.page) {
-             this.setState({ loading: true })
-            const response = await requestApi(this.state.page, this.state.searchQuery)
-            this.setState(prevState => { return { gallery: [...prevState.gallery, ...response.hits], loading: false, isLoadmore: true } })
-        }
+            if (prevState.page !== page) {
+                this.setState({ loading: true })
+                const response = await requestApi(page, searchQuery)
+                this.setState(prevState => { return { gallery: [...prevState.gallery, ...response.hits], loading: false, isLoadmore: true } })
+            }
        
     }
 
   LoadMore = () => {
-      this.setState(prevState => { return { page: prevState.page + 1 } 
-     })
-  }
+       if(this.state.page < this.state.totalPages){this.setState(prevState => { return { page: prevState.page + 1 } 
+     })} else {toast('Sorry, images are over')}
+   }
  
   render() {
-      
-    const {isLoadmore, gallery, loading} = this.state
-        return (
+       const { isLoadmore, gallery, loading } = this.state
+       return (
     <Wrapper>
             <Searchbar onSubmit={this.handelFormSbmit} />
             <Toaster  position="top-right" reverseOrder={false} />
-             {gallery.length>1 && <ImageGallery  gallery={gallery} loading={loading} />}
+            <ImageGallery gallery={gallery} loading={loading} />
             {isLoadmore && (<Button onClick={this.LoadMore}/>)} 
     </Wrapper>)
   }
