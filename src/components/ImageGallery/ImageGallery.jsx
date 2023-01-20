@@ -3,12 +3,19 @@ import { Loader } from 'components/Loader/Loader'
 import { ImageGalleryList, Wrapper } from './ImageGallery.styled'
 import { Component } from "react";
 import { Modal } from 'components/Modal/Modal'
+import { PropTypes } from 'prop-types';
 
 export class ImageGallery extends Component {
     state = {
         showModal: false,
         largeImage:'',
     }
+    static propTypes = {
+        gallery: PropTypes.array.isRequired,
+        loading: PropTypes.bool.isRequired,
+        showModal: PropTypes.bool,
+        largeImage: PropTypes.string,
+         };
 
     openModal = (largeImageURL) => {
                   this.setState({
@@ -22,7 +29,7 @@ export class ImageGallery extends Component {
   
     render() {
           const { gallery, loading }=this.props
-          const{showModal,  largeImage} = this.state
+          const {showModal,  largeImage} = this.state
         return (
             <Wrapper>
                 <ImageGalleryList >

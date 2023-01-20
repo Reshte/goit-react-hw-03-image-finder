@@ -6,6 +6,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery'
 import { Button } from './Button/Button'
 import { requestApi } from 'components/servicis/api'
 import toast, { Toaster } from 'react-hot-toast';
+import { PropTypes } from 'prop-types';
 
 
 
@@ -19,8 +20,19 @@ export class App extends Component{
     gallery: [],
     loading: false,
     isLoadmore: false,
-     }
+  }
   
+   static propTypes = {
+     searchQuery: PropTypes.string,
+     page: PropTypes.number,
+     totalPages: PropTypes.number,
+     gallery: PropTypes.array,
+    loading: PropTypes.bool,
+    isLoadmore: PropTypes.bool,
+     
+  };
+  
+
   handelFormSbmit = (searchQuery) => {
     if(searchQuery.searchQuery.length>0){this.setState({ searchQuery })}else{toast("Enter something")}
   }

@@ -1,12 +1,17 @@
 import { Component } from "react";
 import { Header, SearchForm, SearchFormButton, SearchFormInput } from './Searchbar.styled'
 import { AiOutlineSearch } from "react-icons/ai";
+import { PropTypes } from 'prop-types';
 
 export class Searchbar extends Component {
     state = {
         searchQuery: '',
   }
   
+ static propTypes = {
+        searchQuery: PropTypes.string,
+          };
+
   handelInputChange = (e) => {
     this.setState({searchQuery: e.currentTarget.value.trim()})  
   }
